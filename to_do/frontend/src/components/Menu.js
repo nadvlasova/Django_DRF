@@ -4,9 +4,6 @@ const UserItem = ({user}) => {
     return (
         <tr>
             <td>
-                {user.username}
-            </td>
-            <td>
                 {user.first_name}
             </td>
             <td>
@@ -22,9 +19,6 @@ const UserItem = ({user}) => {
 const UserList = ({users}) => {
     return (
         <table>
-            <th>
-                Username
-            </th>
             <th>
                 First name
             </th>

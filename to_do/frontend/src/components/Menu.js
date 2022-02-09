@@ -2,15 +2,7 @@ import React from "react";
 
 const Menu = () => {
     return (<div>
-            <ul style={{
-                background: "#00FFFF",
-                margin: "0",
-                listStyle: "none",
-                marginTop: "25px",
-                height: "50px",
-
-
-            }}>
+            <ul>
                 <li>One</li>
                 <li>Two</li>
                 <li>Three</li>

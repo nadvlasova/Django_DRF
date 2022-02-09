@@ -1,35 +1,24 @@
 import React from "react";
 
-const UserItem = ({user}) => {
-    return (
-        <tr>
-            <td>
-                {user.first_name}
-            </td>
-            <td>
-                {user.last_name}
-            </td>
-            <td>
-                {user.email}
-            </td>
-        </tr>
+const Menu = () => {
+    return (<div>
+            <ul style={{
+                background: "#00FFFF",
+                margin: "0",
+                listStyle: "none",
+                marginTop: "25px",
+                height: "50px",
+
+
+            }}>
+                <li>One</li>
+                <li>Two</li>
+                <li>Three</li>
+                <li>Four</li>
+                <li>Five</li>
+            </ul>
+        </div>
     )
 }
 
-const UserList = ({users}) => {
-    return (
-        <table>
-            <th>
-                First name
-            </th>
-            <th>
-                Last name
-            </th>
-            <th>
-                Email
-            </th>
-            {users.map((user) => <UserItem user={user} />)}
-        </table>
-    )
-}
-export default UserList
+export default Menu;

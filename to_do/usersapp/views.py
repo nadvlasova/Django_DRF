@@ -7,3 +7,6 @@ class UserModelViewSet(ModelViewSet):
     # renderer_classes = [JSONRenderer] # this only JSON for frontend
     queryset = User.objects.all()
     serializer_class = UserModelSerializer
+
+
+

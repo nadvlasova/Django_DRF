@@ -1,5 +1,5 @@
 from rest_framework.serializers import  HyperlinkedModelSerializer
-from .models import User, Project, TODO
+from .models import User
 
 
 class UserModelSerializer(HyperlinkedModelSerializer):
@@ -11,16 +11,5 @@ class UserModelSerializer(HyperlinkedModelSerializer):
         # exclude = ('email')
 
 
-class ProjectModelSerializer(HyperlinkedModelSerializer):
 
-    class Meta:
-        model = Project
-        fields = '__all__'
-
-
-class TODOModelSerializer(HyperlinkedModelSerializer):
-
-    class Meta:
-        model = TODO
-        fields = '__all__'
 

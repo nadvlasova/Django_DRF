@@ -1,12 +1,13 @@
 import React from "react";
 
-const Footer = () => {
-  return (<div>
-       <footer>
-         GeeksBrains Django Rest
-      </footer>
-      </div>
-  )
+export default function Footer () {
+    return (
+        <footer className="footer mt-auto py-3">
+            <div className="container">
+                <span className="text-muted">GeeksBrains Django Rest</span>
+            </div>
+        </footer>
+    );
 }
 
-export default Footer;
+

@@ -6,7 +6,7 @@ from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from project.filters import ProjectFilter, TODODateFilter
+from project.filters import ProjectFilter, TODOFilter
 from project.models import Project, TODO
 from project.serializers import ProjectModelSerializer, TODOModelSerializer
 
@@ -16,12 +16,18 @@ class ProjectLimitOffsetPagination(LimitOffsetPagination):
 
 
 class ProjectModelViewSet(viewsets.ModelViewSet):
-
-    renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
+    # renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
     queryset = Project.objects.all()
     serializer_class = ProjectModelSerializer
     pagination_class = ProjectLimitOffsetPagination
     filterset_class = ProjectFilter
+
+    def get_queryset(self):
+        queryset = Project.objects.all()
+        name = self.request.query_params.get('name', None)
+        if name:
+            queryset = queryset.filter(name__contains=name)
+        return queryset
 
 
 class TOLimitOffsetPagination(LimitOffsetPagination):
@@ -31,12 +37,11 @@ class TOLimitOffsetPagination(LimitOffsetPagination):
 class TODOCustomViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
                         mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
                         viewsets.GenericViewSet):
-
     renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
     queryset = TODO.objects.all()
     serializer_class = TODOModelSerializer
     pagination_class = TOLimitOffsetPagination
-    filterset_class = TODODateFilter
+    filterset_class = TODOFilter
 
     def destroy(self, request, *args, **kwargs):
         try:

@@ -10,11 +10,13 @@ class ProjectFilter(filters.FilterSet):
         fields = ['name']
 
 
-class TODODateFilter(filters.FilterSet):
-    date_create = IsoDateTimeFilter()
-    date_update = IsoDateTimeFilter()
+class TODOFilter(filters.FilterSet):
+    # name_project = filters.CharFilter(lookup_expr='contains')
+    # date_create = IsoDateTimeFilter()
+    # date_update = IsoDateTimeFilter()
+    date_create = filters.DateFromToRangeFilter()
 
     class Meta:
         model = TODO
-        fields = ['date_create', 'date_update']
+        fields = ['name_project', 'date_create']
 

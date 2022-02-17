@@ -1,20 +1,49 @@
 from django.shortcuts import render
 
-# Create your views here.
+from rest_framework import viewsets, mixins, status
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from project.filters import ProjectFilter, TODODateFilter
 from project.models import Project, TODO
 from project.serializers import ProjectModelSerializer, TODOModelSerializer
 
 
-class ProjectModelViewSet(ModelViewSet):
+class ProjectLimitOffsetPagination(LimitOffsetPagination):
+    default_limit = 10
+
+
+class ProjectModelViewSet(viewsets.ModelViewSet):
+
     renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
     queryset = Project.objects.all()
     serializer_class = ProjectModelSerializer
+    pagination_class = ProjectLimitOffsetPagination
+    filterset_class = ProjectFilter
 
 
-class TODOModelViewSet(ModelViewSet):
+class TOLimitOffsetPagination(LimitOffsetPagination):
+    default_limit = 20
+
+
+class TODOCustomViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
+                        mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
+                        viewsets.GenericViewSet):
+
     renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
     queryset = TODO.objects.all()
     serializer_class = TODOModelSerializer
+    pagination_class = TOLimitOffsetPagination
+    filterset_class = TODODateFilter
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+            instance.is_active = False
+            instance.save()
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response(status=status.HTTP_204_NO_CONTENT)

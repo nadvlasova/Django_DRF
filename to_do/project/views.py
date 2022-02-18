@@ -16,10 +16,10 @@ class ProjectLimitOffsetPagination(LimitOffsetPagination):
 
 
 class ProjectModelViewSet(viewsets.ModelViewSet):
-    # renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
+    renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
     queryset = Project.objects.all()
     serializer_class = ProjectModelSerializer
-    pagination_class = ProjectLimitOffsetPagination
+    # pagination_class = ProjectLimitOffsetPagination
     filterset_class = ProjectFilter
 
     def get_queryset(self):
@@ -40,7 +40,7 @@ class TODOCustomViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
     renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
     queryset = TODO.objects.all()
     serializer_class = TODOModelSerializer
-    pagination_class = TOLimitOffsetPagination
+    # pagination_class = TOLimitOffsetPagination
     filterset_class = TODOFilter
 
     def destroy(self, request, *args, **kwargs):

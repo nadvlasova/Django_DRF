@@ -8,7 +8,7 @@ const TodoItem = ({todo}) => {
             <td>{todo.text}</td>
             <td>{todo.date_create}</td>
             <td>{todo.date_update}</td>
-            <td>{todo.creators}</td>
+            <td>{todo.creator}</td>
             <td>{todo.is_active}</td>
         </tr>
     )

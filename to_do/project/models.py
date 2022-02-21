@@ -3,9 +3,12 @@ from usersapp.models import User
 
 
 class Project(models.Model):
-    name = models.CharField(max_length=200)
-    link_to_repo = models.URLField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
+    link_to_repo = models.URLField(max_length=200, blank=True)
     users_list = models.ManyToManyField(User)
+
+    def __str__(self):
+        return self.name
 
 
 class TODO(models.Model):

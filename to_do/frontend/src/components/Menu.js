@@ -5,12 +5,10 @@ import {HashRouter, Link} from "react-router-dom";
 
 function NavbarItem({name, href}) {
     return (
-        // <HashRouter>
             <li className="nav-item active">
                 <Link className="nav-link" to={href}>{name}</Link>
                 {/*<a className="nav-link"  to={href}> {name} </a>*/}
             </li>
-        // </HashRouter>
     )
 }
 

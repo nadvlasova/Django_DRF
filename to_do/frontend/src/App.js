@@ -7,7 +7,6 @@ import './bootstrap/css/sticky-footer-navbar.css'
 
 import UserList from "./components/User.js";
 import {ProjectList, ProjectDetail} from "./components/Projects.js";
-// import ProjectList from "./components/Projects";
 import TodoList from "./components/Todos.js";
 import Navbar from "./components/Menu.js";
 import Footer from "./components/Footer.js";

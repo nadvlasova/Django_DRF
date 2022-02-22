@@ -29,10 +29,11 @@ export const ProjectList = ({projects}) => {
     )
 }
 
-const ProjectUserItem = ({item}) => {
+const ProjectUserItem = ({user}) => {
+    // console.log(item)
     return (
         <li>
-            {item.username} ({item.email}
+            {user.username} ({user.email}
         </li>
     )
 }
@@ -40,7 +41,7 @@ const ProjectUserItem = ({item}) => {
 export const ProjectDetail = ({getProject, item}) => {
     let {id} = useParams();
     getProject(id)
-    let users = item.users ? item.users : []
+    let users = item.users ? item.users: []
     console.log(id)
     return (
         <div>
@@ -49,7 +50,7 @@ export const ProjectDetail = ({getProject, item}) => {
             <p>1</p>
             Users:
             <ol>
-                {users.map((user) => <ProjectUserItem item={user}/>)}
+                {users.map((user) => <ProjectUserItem user={user}/>)}
             </ol>
         </div>
     )

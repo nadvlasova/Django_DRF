@@ -74,7 +74,7 @@ class App extends React.Component {
 
                                 <Route exact path='/projects'> <ProjectList projects={this.state.projects}/></Route>
 
-                                <Route exact path='/todos'>  <TodoList todos={this.state.todos}/> </Route>
+                                <Route exact path='/todos'> <TodoList todos={this.state.todos}/> </Route>
 
 
                                 <Route path="/project/:id"
@@ -89,7 +89,7 @@ class App extends React.Component {
                     </main>
                     <Footer/>
                 </Router>
-                // </div>
+            </div>
         )
     }
 }

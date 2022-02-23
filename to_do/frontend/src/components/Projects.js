@@ -10,6 +10,7 @@ const ProjectListItem = ({project}) => {
             <td>{project.id}</td>
             <td>{project.name}</td>
             <td>{project.link_to_repo}</td>
+            <td>{project.users_list}</td>
             <td><Link to={link_to}>Detail</Link></td>
         </tr>
     )
@@ -23,6 +24,7 @@ export const ProjectList = ({projects}) => {
                 <th>Name</th>
                 <th>Repository</th>
                 <th>Users_list</th>
+                <th>Detail</th>
             </tr>
             {projects.map((project) => <ProjectListItem project={project}/>)}
         </table>

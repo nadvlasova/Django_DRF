@@ -1,14 +1,15 @@
 import React from "react";
-import UserList from "./User";
-import {HashRouter, Link} from "react-router-dom";
+// import UserList from "./User";
+import {Link} from "react-router-dom";
 
 
 function NavbarItem({name, href}) {
     return (
-            <li className="nav-item active">
-                <Link className="nav-link" to={href}>{name}</Link>
-                {/*<a className="nav-link"  to={href}> {name} </a>*/}
-            </li>
+        <li className="nav-item active">
+            <Link className="nav-link" to={href}>{name}</Link>
+        </li>
+
+
     )
 }
 
@@ -26,6 +27,10 @@ export default function Navbar({navbarItems}) {
                     <li className="nav-item active">
                         {navbarItems.map((item) => <NavbarItem name={item.name} href={item.href}/>)}
                     </li>
+                    <li>
+                        <Link to='/login'> Login </Link>
+                    </li>
+
                 </ul>
                 <form className="form-inline mt-2 mt-md-0">
                     <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>

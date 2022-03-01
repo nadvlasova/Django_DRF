@@ -29,12 +29,14 @@ class App extends React.Component {
                 {name: 'Todos', href: '/todos'},
 
 
+
             ],
             'users': [],
             'projects': [],
             'project': [],
             'todos': [],
             'token': '',
+
 
         }
     }
@@ -77,10 +79,10 @@ class App extends React.Component {
         let headers = {
             'Content-Type': 'application/json'
         }
-        // console.log(headers)
-        // console.log(this.is_authenticated())
-    if (this.is_authenticated()) {
-        console.log(`Token ${this.state.token}`)
+        console.log(headers)
+        console.log(this.is_authenticated())
+        if (this.is_authenticated()) {
+            console.log(`Token ${this.state.token}`)
             headers['Authorization'] = `Token ${this.state.token}`
         }
         return headers
@@ -133,21 +135,31 @@ class App extends React.Component {
             <div>
                 <Router>
                     <header>
-                        <Navbar navbarItems={this.state.navbarItems}/>
+                        {/*<Navbar navbarItems={this.state.navbarItems}/>*/}
+                        <nav>
+                            <ul>
+                                <li><Link to='/'>Users</Link></li>
+                                <li><Link to='/projects'>Projects</Link></li>
+                                <li><Link to='/todos'>Todos</Link></li>
+                                <li> {this.is_authenticated() ? <button onClick={() => this.logout()}>Logout</button> :
+                                    <Link to='/login'>Login</Link>}
+                                </li>
+                            </ul>
+                        </nav>
                     </header>
                     <main role="main" class="flex-shrink-0">
                         <div className="container">
                             <Switch>
-                                <Route exact path='/'> <UserList users={this.state.users}/> </Route>
+                                {/*<Route exact path='/'> <UserList users={this.state.users}/> </Route>*/}
+                                <Route exact path='/' component={() => <UserList users={this.state.users}/>}/>
 
-                                <Route exact path='/projects'> <ProjectList projects={this.state.projects}/></Route>
+                                <Route exact path='/projects'> <ProjectList projects={this.state.projects}
+                                                                            auth={this.is_authenticated()}/></Route>
 
                                 <Route exact path='/todos'> <TodoList todos={this.state.todos}/> </Route>
 
                                 <Route exact path='/login'> <LoginForm get_token={(username,
-                                                                                   password) => this.get_token(username, password)}/>
-
-                                </Route>
+                                       password) => this.get_token(username, password)}/> </Route>
 
 
                                 <Route path="/project/:id"

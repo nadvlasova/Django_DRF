@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from rest_framework import viewsets, mixins, status
 from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -21,6 +22,7 @@ class ProjectModelViewSet(viewsets.ModelViewSet):
     serializer_class = ProjectModelSerializer
     # pagination_class = ProjectLimitOffsetPagination
     filterset_class = ProjectFilter
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         queryset = Project.objects.all()
@@ -42,6 +44,7 @@ class TODOCustomViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
     serializer_class = TODOModelSerializer
     # pagination_class = TOLimitOffsetPagination
     filterset_class = TODOFilter
+    # permission_classes = [IsAdminUser]
 
     def destroy(self, request, *args, **kwargs):
         try:

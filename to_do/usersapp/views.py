@@ -1,4 +1,5 @@
 from rest_framework import mixins, viewsets
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.viewsets import ModelViewSet
 from .models import User
@@ -9,7 +10,7 @@ class UserModelViewSet(viewsets.ModelViewSet):
     renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
     queryset = User.objects.all()
     serializer_class = UserModelSerializer
-
+    permission_classes = [IsAuthenticated]
 
 
 

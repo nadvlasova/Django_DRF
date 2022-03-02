@@ -46,7 +46,7 @@ class App extends React.Component {
         cookies.set('token', token)
         this.setState({'token': token}, () => this.load_data())
         // this.setState({'token': token})
-        console.log(this.set_token)
+        // console.log(this.set_token)
     }
 
     is_authenticated() {
@@ -79,10 +79,10 @@ class App extends React.Component {
         let headers = {
             'Content-Type': 'application/json'
         }
-        console.log(headers)
-        console.log(this.is_authenticated())
+        // console.log(headers)
+        // console.log(this.is_authenticated())
         if (this.is_authenticated()) {
-            console.log(`Token ${this.state.token}`)
+            // console.log(`Token ${this.state.token}`)
             headers['Authorization'] = `Token ${this.state.token}`
         }
         return headers
@@ -91,7 +91,7 @@ class App extends React.Component {
     getProject(id) {
         axios.get(get_url(`projects/${id}`))
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 this.setState({project: response.data})
             }).catch(error => console.log(error))
     }
@@ -136,8 +136,9 @@ class App extends React.Component {
                 <Router>
                     <header>
                         {/*<Navbar navbarItems={this.state.navbarItems}/>*/}
-                        <nav>
-                            <ul>
+                        <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-warning">
+                            <a className="navbar-brand" href="#">GeekBrains</a>
+                            <ul className="navbar-nav mr-auto">
                                 <li><Link to='/'>Users</Link></li>
                                 <li><Link to='/projects'>Projects</Link></li>
                                 <li><Link to='/todos'>Todos</Link></li>

@@ -154,8 +154,7 @@ class App extends React.Component {
                                 {/*<Route exact path='/'> <UserList users={this.state.users}/> </Route>*/}
                                 <Route exact path='/' component={() => <UserList users={this.state.users}/>}/>
 
-                                <Route exact path='/projects'> <ProjectList projects={this.state.projects}
-                                                                            auth={this.is_authenticated()}/></Route>
+                                <Route exact path='/projects'> <ProjectList projects={this.state.projects}/></Route>
 
                                 <Route exact path='/todos'> <TodoList todos={this.state.todos}/> </Route>
 

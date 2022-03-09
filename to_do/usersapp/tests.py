@@ -20,8 +20,8 @@ class TestUserModelViewSet(TestCase):
         self.email = 'admin@admin.com'
         self.admin = User.objects.create_superuser(self.name, self.email, self.password)
 
-        self.data = {'first_name': 'Ivan', 'last_name': 'Petrov', 'email': 'ivan@mail.com'}
-        self.data_put = {'first_name': 'IVAN', 'last_name': 'PETROV', 'email': 'IVAN@mail.com'}
+        self.data = {'username': 'ivan', 'first_name': 'Ivan', 'last_name': 'Petrov', 'email': 'ivan@mail.com'}
+        self.data_put = {'username': 'ivan', 'first_name': 'IVAN', 'last_name': 'PETROV', 'email': 'IVAN@mail.com'}
         self.url = '/api/usersapp/'
 
     # APIRequestFactory force_authenticate
@@ -51,7 +51,7 @@ class TestUserModelViewSet(TestCase):
 
     def test_get_detail(self):
         client = APIClient()
-        user = User.objects.create(**self.data)
+        user = User.objects.create(**self.data) # создаем юзера
         response = client.get(f'{self.url}{user.id}/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -61,19 +61,19 @@ class TestUserModelViewSet(TestCase):
         response = client.put(f'{self.url}{user.id}/', self.data_put)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    # def test_put_admin(self):
-    #     client = APIClient()
-    #     user = User.objects.create(**self.data)
-    #     client.login(username=self.name, password=self.password)
-    #     response = client.put(f'{self.url}{user.id}/', self.data_put)
-    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
-    #
-    #     user_ = User.objects.get(id=user.id)
-    #     self.assertEqual(user_.first_name, self.data_put.get('first_name'))
-    #     self.assertEqual(user_.last_name, self.data_put.get('last_name'))
-    #     self.assertEqual(user_.email, self.data_put.get('email'))
-    #
-    #     client.logout()
+    def test_put_admin(self):
+        client = APIClient()
+        user = User.objects.create(**self.data)
+        client.login(username=self.name, password=self.password)
+        response = client.put(f'{self.url}{user.id}/', self.data_put)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        user_ = User.objects.get(id=user.id)
+        self.assertEqual(user_.first_name, self.data_put.get('first_name'))
+        self.assertEqual(user_.last_name, self.data_put.get('last_name'))
+        self.assertEqual(user_.email, self.data_put.get('email'))
+
+        client.logout()
 
     def tearDown(self) -> None:
         pass
@@ -98,8 +98,8 @@ class TestProject(APITestCase):
         self.password = 'admin_123456789'
         self.email = 'admin@admin.com'
 
-        self.data = {'first_name': 'Иван', 'last_name': 'Петров', 'email': 'ivan@ivan.com'}
-        self.data_put = {'first_name': 'IVAN', 'last_name': 'PETROV', 'email': 'IVAN@mail.com'}
+        self.data = {'username': 'ivan', 'first_name': 'Иван', 'last_name': 'Петров', 'email': 'ivan@ivan.com'}
+        self.data_put = {'username': 'ivan', 'first_name': 'IVAN', 'last_name': 'PETROV', 'email': 'IVAN@mail.com'}
         self.url = '/api/projects/'
         self.admin = User.objects.create_superuser(self.name, self.email, self.password)
 
@@ -107,16 +107,16 @@ class TestProject(APITestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    # def test_put_admin(self):
-    #     user = User.objects.create(**self.data)
-    #     todo1 = TODO.objects.create(name_project='name', creator=user)  # уточнить создателя
-    #     self.client.login(username=self.name, password=self.password)
-    #     response = self.client.put(f'{self.url}{todo1.id}/', {'name_project': 'NewTodo', 'creator': todo1.user.id})
-    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
-    #
-    #     todo2 = TODO.objects.get(id=todo1.id)
-    #     self.assertEqual(todo2.name_project, 'NewTodo')
-    #     self.client.logout()
+    def test_put_admin(self):
+        user = User.objects.create(**self.data)
+        todo1 = TODO.objects.create(name_project='name', creator=user)  # уточнить создателя
+        self.client.login(username=self.name, password=self.password)
+        response = self.client.put(f'{self.url}{todo1.id}/', {'name_project': 'NewTodo', 'creator': todo1.user.id})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        todo2 = TODO.objects.get(id=todo1.id)
+        self.assertEqual(todo2.name_project, 'NewTodo')
+        self.client.logout()
 
     # def test_put_mixer(self):
     #     todo1 = mixer.blend(TODO)

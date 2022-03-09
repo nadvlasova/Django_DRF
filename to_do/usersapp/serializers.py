@@ -6,8 +6,8 @@ class UserModelSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        # fields = ('username', 'first_name', 'last_name', 'email')
-        fields = '__all__'
+        fields = ('username', 'first_name', 'last_name', 'email')
+        # fields = '__all__'
         # exclude = ('email')
 
 

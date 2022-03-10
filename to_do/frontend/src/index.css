@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+
+
+}
+
+li {
+    float: left;
+}
+
+a {
+    display: block;
+    padding: 8px;
+}
+
+main {
+    padding-bottom: 70px;
+}
+.footer {
+    position: fixed;
+    background-color: aquamarine;
+
+}
+

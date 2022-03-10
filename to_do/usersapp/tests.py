@@ -51,7 +51,7 @@ class TestUserModelViewSet(TestCase):
 
     def test_get_detail(self):
         client = APIClient()
-        user = User.objects.create(**self.data) # создаем юзера
+        user = User.objects.create(**self.data)  # создаем юзера
         response = client.get(f'{self.url}{user.id}/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -109,19 +109,23 @@ class TestProject(APITestCase):
 
     def test_put_admin(self):
         user = User.objects.create(**self.data)
-        todo1 = TODO.objects.create(name_project='name', creator=user)  # уточнить создателя
+        project_1 = Project.objects.create(name='NAME', link_to_repo='https://www.yahoo.com')
+        # todo1 = TODO.objects.create(name_project='name', creator=user)  # уточнить создателя
+
         self.client.login(username=self.name, password=self.password)
-        response = self.client.put(f'{self.url}{todo1.id}/', {'name_project': 'NewTodo', 'creator': todo1.user.id})
+        response = self.client.put(f'{self.url}{project_1.id}/', {'name': 'NewTestProject',
+                                                                  'link_to_repo': 'https://www.yahoo.com'})
+        # response = self.client.put(f'{self.url}{todo1.id}/', {'name_project': 'NewTodo', 'creator': todo1.creator.id})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        todo2 = TODO.objects.get(id=todo1.id)
-        self.assertEqual(todo2.name_project, 'NewTodo')
+        # todo2 = TODO.objects.get(id=todo1.id)
+        # self.assertEqual(todo2.name_project, 'NewTodo')
         self.client.logout()
 
     # def test_put_mixer(self):
     #     todo1 = mixer.blend(TODO)
     #     self.client.login(username=self.name, password=self.password)
-    #     response = self.client.put(f'{self.url}{todo1.id}/', {'name_project': 'NewTodo', 'creator': todo1.user.id})
+    #     response = self.client.put(f'{self.url}{todo1.id}/', {'name_project': 'NewTodo', 'creator': todo1.creator.id})
     #     self.assertEqual(response.status_code, status.HTTP_200_OK)
     #
     #     todo2 = TODO.objects.get(id=todo1.id)

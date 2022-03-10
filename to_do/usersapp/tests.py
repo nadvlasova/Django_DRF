@@ -118,27 +118,30 @@ class TestProject(APITestCase):
         # response = self.client.put(f'{self.url}{todo1.id}/', {'name_project': 'NewTodo', 'creator': todo1.creator.id})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+        project_2 = Project.objects.get(id=project_1.id)
         # todo2 = TODO.objects.get(id=todo1.id)
+        self.assertEqual(project_2.name, 'NewTestProject')
         # self.assertEqual(todo2.name_project, 'NewTodo')
         self.client.logout()
 
-    # def test_put_mixer(self):
-    #     todo1 = mixer.blend(TODO)
-    #     self.client.login(username=self.name, password=self.password)
-    #     response = self.client.put(f'{self.url}{todo1.id}/', {'name_project': 'NewTodo', 'creator': todo1.creator.id})
-    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
-    #
-    #     todo2 = TODO.objects.get(id=todo1.id)
-    #     self.assertEqual(todo2.name_project, 'NewTodo')
-    #     self.client.logout()
+    def test_put_mixer(self):
+        project_3 = mixer.blend(TODO)
+        self.client.login(username=self.name, password=self.password)
+        response = self.client.put(f'{self.url}{project_3.id}/', {'name': 'NewTestProject_3',
+                                                                  'link_to_repo': 'https://www.yahoo.com'})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    # def test_put_mixer_fields(self):
-    #     todo1 = mixer.blend(TODO, name_project='NewTodo1')
-    #     self.assertEqual(todo1.name_project, 'NewTodo1')
-    #     self.client.login(username=self.name, password=self.password)
-    #     response = self.client.put(f'{self.url}{todo1.id}/', {'name_project': 'NewTodo', 'creator': todo1.user.id})
-    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
-    #
-    #     todo2 = TODO.objects.get(id=todo1.id)
-    #     self.assertEqual(todo2.name_project, 'NewTodo')
-    #     self.client.logout()
+        project_4 = Project.objects.get(id=project_3.id)
+        self.assertEqual(project_4.name, 'NewTestProject_3')
+        self.client.logout()
+
+    def test_put_mixer_fields(self):
+        project_5 = mixer.blend(TODO, name='NewTestProject_4')
+        self.assertEqual(project_5.name, 'NewTestProject_4')
+        self.client.login(username=self.name, password=self.password)
+        response = self.client.put(f'{self.url}{project_5.id}/', {'name': 'NewTestProject_4', 'link_to_repo': 'https://www.yahoo.com'})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        project_6 = Project.objects.get(id=project_5.id)
+        self.assertEqual(project_6.name, 'NewTestProject_4')
+        self.client.logout()

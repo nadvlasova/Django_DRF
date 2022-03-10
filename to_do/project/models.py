@@ -7,8 +7,8 @@ class Project(models.Model):
     link_to_repo = models.URLField(max_length=200, blank=True)
     users_list = models.ManyToManyField(User)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return f' {self.name} | {self.link_to_repo} | {self.users_list}'
 
 
 class TODO(models.Model):

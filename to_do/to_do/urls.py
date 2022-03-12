@@ -33,7 +33,7 @@ schema_view = get_schema_view(
         default_version='v1',
         description='Project',
         contact=openapi.Contact(email='to_do@mail.ru'),
-        license=openapi.License(name='GB License')
+        license=openapi.License(name='GB License'),
     ),
     public=True,
     permission_classes=(permissions.AllowAny,)
@@ -54,7 +54,10 @@ urlpatterns = [
     path('api-token-auth/', views.obtain_auth_token),
 
     # path('api/<str:version>/user/', UserListAPIView.as_view()),
-    path('api/user/v1', include('user_api.urls', namespace='v1')),
-    path('api/user/v2', include('user_api.urls', namespace='v2')),
+    # path('api/user/v1', include('user_api.urls', namespace='v1')),
+    # path('api/user/v2', include('user_api.urls', namespace='v2')),
+
+    path('swagger/', schema_view.with_ui('swagger')),
+    # path('swagger<str:format>', schema_view.without_ui()),
 
 ]

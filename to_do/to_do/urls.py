@@ -36,6 +36,9 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
     path('api-token-auth/', views.obtain_auth_token),
-    path('api/<str:version>/user/', UserListAPIView.as_view()),
+
+    # path('api/<str:version>/user/', UserListAPIView.as_view()),
+    path('api/user/v1', include('user_api.urls', namespace='v1')),
+    path('api/user/v2', include('user_api.urls', namespace='v2')),
 
 ]

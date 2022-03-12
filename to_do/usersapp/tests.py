@@ -110,7 +110,7 @@ class TestProject(APITestCase):
     def test_put_admin(self):
         user = User.objects.create(**self.data)
         project_1 = Project.objects.create(name='NAME', link_to_repo='https://www.yahoo.com')
-        # todo1 = TODO.objects.create(name_project='name', creator=user)  # уточнить создателя
+        # todo1 = TODO.objects.create(name_project='name', creator=user_api)  # уточнить создателя
 
         self.client.login(username=self.name, password=self.password)
         response = self.client.put(f'{self.url}{project_1.id}/', {'name': 'NewTestProject',

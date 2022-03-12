@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'project',
     'to_do',
     'rest_framework.authtoken',
+    'user_api',
 ]
 
 MIDDLEWARE = [

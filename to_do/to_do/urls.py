@@ -60,4 +60,6 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger')),
     # path('swagger<str:format>', schema_view.without_ui()),
 
+    path('redoc/', schema_view.with_ui('redoc')),
+
 ]

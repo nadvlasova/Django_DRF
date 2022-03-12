@@ -11,5 +11,13 @@ class UserModelSerializer(ModelSerializer):
         # exclude = ('email')
 
 
+class UserBasedModelSerializer(ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name')
+
+
+
 
 

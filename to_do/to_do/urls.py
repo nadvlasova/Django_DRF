@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework import permissions
 from rest_framework.authtoken import views
 from rest_framework.routers import DefaultRouter
 
@@ -23,6 +26,19 @@ from user_api.views import UserListAPIView
 from usersapp.views import UserModelViewSet
 
 # from usersapp.views import UserCustomViewSet
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title='to_do',
+        default_version='v1',
+        description='Project',
+        contact=openapi.Contact(email='to_do@mail.ru'),
+        license=openapi.License(name='GB License')
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,)
+)
+
 
 router = DefaultRouter()
 

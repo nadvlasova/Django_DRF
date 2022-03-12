@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'to_do',
     'rest_framework.authtoken',
     'user_api',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [

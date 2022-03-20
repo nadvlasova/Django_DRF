@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'user_api',
     'drf_yasg',
-    'django.contrib.staticfiles',
     'graphene_django',
 ]
 
@@ -161,5 +160,5 @@ REST_FRAMEWORK = {
 }
 
 GRAPHENE = {
-    'SCHEMA': 'library.schema.schema',
+    'SCHEMA': 'to_do.schema.schema'
 }

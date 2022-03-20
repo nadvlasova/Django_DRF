@@ -9,3 +9,4 @@ sqlparse==0.4.2
 zipp==3.7.0
 
 mixer~=7.2.1
+graphene~=2.1.9

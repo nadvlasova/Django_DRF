@@ -41,6 +41,22 @@ class App extends React.Component {
         }
     }
 
+    // createUser(){
+    //
+    // }
+
+    deleteUser(id){
+        const headers = this.get_headers()
+        axios.delete(`http://127.0.0.1:8000/api/usersapp/${id}`,{headers}).then(
+            response =>{
+                this.load_data()
+            }
+        ).catch(error =>{
+            console.log(error)
+            this.setState({users:[]})
+        })
+    }
+
     set_token(token) {
         const cookies = new Cookies()
         cookies.set('token', token)

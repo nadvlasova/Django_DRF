@@ -169,7 +169,8 @@ class App extends React.Component {
                         <div className="container">
                             <Switch>
                                 {/*<Route exact path='/'> <UserList users={this.state.users}/> </Route>*/}
-                                <Route exact path='/' component={() => <UserList users={this.state.users}/>}/>
+                                <Route exact path='/' component={() => <UserList users={this.state.users}
+                                deleteUser={(id)=> this.deleteUser(id)}/>}/>
 
                                 <Route exact path='/projects'> <ProjectList projects={this.state.projects}/></Route>
 

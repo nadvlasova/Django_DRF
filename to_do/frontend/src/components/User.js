@@ -2,7 +2,7 @@ import React from 'react'
 import {Link, useParams} from "react-router-dom";
 
 
-const UserItem = ({user}) => {
+const UserItem = ({user, deleteUser}) => {
     return (
         <tr>
             <td>{user.id}</td>
@@ -11,13 +11,13 @@ const UserItem = ({user}) => {
             <td>{user.last_name}</td>
             <td>{user.email}</td>
             <td>
-                <button type='button'>Delete</button>
+                <button onClick={()=>deleteUser(user.id)} type='button'>Delete</button>
             </td>
         </tr>
     )
 }
 
-const UserList = ({users}) => {
+const UserList = ({users, deleteUser}) => {
     return (
         <table className="table">
             <tr>
@@ -27,7 +27,7 @@ const UserList = ({users}) => {
                 <th>Last Name</th>
                 <th>Email</th>
             </tr>
-            {users.map((user) => <UserItem user={user} />)}
+            {users.map((user) => <UserItem user={user} deleteUser={deleteUser} />)}
         </table>
     )
 }

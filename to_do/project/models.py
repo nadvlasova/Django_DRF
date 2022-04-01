@@ -16,5 +16,5 @@ class TODO(models.Model):
     text = models.TextField(null=False, blank=False)
     date_create = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now=True)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    creator = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)

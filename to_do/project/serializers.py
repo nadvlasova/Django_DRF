@@ -5,7 +5,7 @@ from usersapp import serializers
 
 
 class ProjectModelSerializer(ModelSerializer):
-    users_list = serializers.UserModelSerializer(many=True)
+    # users_list = serializers.UserModelSerializer(many=True)
 
     class Meta:
         model = Project
@@ -14,6 +14,7 @@ class ProjectModelSerializer(ModelSerializer):
 
 
 class TODOModelSerializer(ModelSerializer):
+
     # creator = serializers.UserModelSerializer()
     # project_name = ProjectModelSerializer()
 
@@ -21,5 +22,6 @@ class TODOModelSerializer(ModelSerializer):
         model = TODO
         fields = '__all__'
         # fields = ('name_project', 'creator',)
+
 
 

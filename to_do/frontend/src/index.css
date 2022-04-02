@@ -21,8 +21,14 @@ main {
 .footer {
     position: fixed;
     background-color: aquamarine;
-
+    text-align: center;
 }
 
-
+.select {
+    position: center;
+    width: 1110px;
+    height: 60px;
+    margin:auto;
+    /*background-color: #1c7430;*/
+}
 

@@ -62,14 +62,14 @@ class ProjectForm extends React.Component {
                 <div>
                     <div className="form-group">
                         <label htmlFor="user">Список пользователей проекта</label>
-                        <select name="user" multiple onChange={(event) => this.handleProjectChange(event)}>
+                        <select className="select" name="user" multiple onChange={(event) => this.handleProjectChange(event)}>
                             {this.props.users_list.map((item) => <option value={item.id}> {item.first_name}</option>)}
 
                         </select>
                     </div>
                 </div>
 
-                <input type="submit" className="btn btn-primary" value="Save"/>
+                <input type="submit" className="btn btn-primary btn-lg btn-block" value="Save"/>
             </form>
         );
     }

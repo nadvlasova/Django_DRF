@@ -1,4 +1,3 @@
-
 from django.db import models
 from usersapp.models import User
 
@@ -20,8 +19,3 @@ class TODO(models.Model):
     date_update = models.DateTimeField(auto_now=True)
     creator = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
-
-    # def __str__(self):
-    #     return f' {self.name_project} | {self.text} | {self.date_create} | {self.date_update} | {self.creator} | {self.is_active}'
-
-    # date_create = date_create.strftime("%m/%d/%Y, %h:%m:%s")

@@ -9,13 +9,31 @@ services:
     environment:
       POSTGRES_USER: nadezhda
       POSTGRES_PASSWORD: 1
-      POSTGRES_db: db
-
-  admins:
-    image: adminer:4.7.8-standalone
-    restart: always
+      POSTGRES_DB: db
+  backend:
+    build: ./to_do
+    privileged: true
     ports:
-      - 8080:8080
+      - 8081:8081
+    command:
+      bash -c "python3 manage.py migrate &&
+      python3 manage.py runserver 0.0.0.0:8081"
     depends_on:
       - db
+#  nginx:
+#    build: ./
+#    ports:
+#      - 8000:80
+#    depends_on:
+#      - backend
+#  frontend:
+#    build: ./frontend
+#    ports:
+#      - 80:80
+#    depends_on:
+#      - nginx
+
+
+
+
 

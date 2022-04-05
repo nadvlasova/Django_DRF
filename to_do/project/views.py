@@ -8,8 +8,10 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from project.filters import ProjectFilter, TODOFilter
-from project.models import Project, TODO
+
 from project.serializers import ProjectModelSerializer, TODOModelSerializer
+
+from project.models import Project, TODO
 
 
 class ProjectLimitOffsetPagination(LimitOffsetPagination):

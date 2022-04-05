@@ -13,7 +13,7 @@ from usersapp.models import User
 # schema = graphene.Schema(query=Query)
 
 # --------------
-# class UserType(DjangoObjectType):
+# class UserType(DjangoObject
 #     class Meta:
 #         model = User
 #         fields = '__all__'

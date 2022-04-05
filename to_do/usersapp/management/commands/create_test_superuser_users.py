@@ -14,7 +14,7 @@ class Command(BaseCommand):
         User.objects.all().delete()
         user_total = kwargs['total']
 
-        User.objects.create_superuser('nadezhda', 'nadezhda@mail.com', '123',
+        User.objects.create_superuser('nadezhda', 'nadezhda@mail.com', '1',
                                       first_name='Nadezhda',
                                       last_name='Vlasova')
 

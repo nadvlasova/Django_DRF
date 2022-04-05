@@ -3,8 +3,6 @@ from rest_framework import serializers
 from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer
 
 from project.models import Project, TODO
-# from usersapp import serializers
-from usersapp.serializers import UserModelSerializer
 
 
 class ProjectModelSerializer(ModelSerializer):

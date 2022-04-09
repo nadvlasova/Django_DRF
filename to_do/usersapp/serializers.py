@@ -18,6 +18,12 @@ class UserBasedModelSerializer(ModelSerializer):
         fields = ('first_name', 'last_name')
 
 
+# class UsersListSerializer(UserModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ('username')
+
+
 
 
 

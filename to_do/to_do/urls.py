@@ -1,5 +1,4 @@
 """to_do URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
 Examples:
@@ -21,11 +20,12 @@ from drf_yasg.views import get_schema_view
 from graphene_django.views import GraphQLView
 from rest_framework import permissions
 from rest_framework.authtoken import views
-from rest_framework.routers import Default, DefaultRouter
+from rest_framework.routers import DefaultRouter
 
 from project.views import ProjectModelViewSet, TODOCustomViewSet
 from user_api.views import UserListAPIView
 from usersapp.views import UserModelViewSet
+
 # from usersapp.views import UserCustomViewSet
 
 schema_view = get_schema_view(
@@ -39,6 +39,7 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=(permissions.AllowAny,)
 )
+
 
 router = DefaultRouter()
 
@@ -63,6 +64,6 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc')),
     path('graphql/', GraphQLView.as_view(graphiql=True)),
 
-    path('', TemplateView.as_view(template_name='index.html')),
+    # path('', TemplateView.as_view(template_name='index.html')),
 
 ]

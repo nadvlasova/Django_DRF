@@ -13,18 +13,31 @@ services:
 
   backend:
     build: ./to_do
+    privileged: true
+    ports:
+      - 8080:8080
+    command:
+      bash -c "python manage.py migrate &&
+      python manage.py create_test_superuser_users 3 &&
+      gunicorn to_do.wsgi -b 0.0.0.0:8080"
+    depends_on:
+      - db
+  nginx:
+    build: ./nginx
+    ports:
+      - 8000:80
+    depends_on:
+      - backend
+  frontend:
+    build: ./frontend
+    ports:
+      - 80:80
+    depends_on:
+      - nginx
 
 
-#  backend:
-#    build: ./to_do
-#    privileged: true
-#    ports:
-#      - 8081:8081
-#    command:
-#      bash -c "python3 manage.py migrate &&
-#      python3 manage.py runserver 0.0.0.0:8081"
-#    depends_on:
-#      - db
+
+
 #  nginx:
 #    build: ./
 #    ports:

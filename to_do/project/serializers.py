@@ -23,11 +23,13 @@ class TODOModelSerializer(ModelSerializer):
     date_create = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S", default=True)
     date_update = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S", default=True)
     creator = serializers.CharField(max_length=64)
-    # name_project = ProjectModelSerializer(instance='name', data={'name'}, partial=True)
-    # name_project = ProjectModelSerializer(data={'name'}, partial=True)
+    name_project = ProjectModelSerializer(instance='name', data={'name'}, partial=True)  # work
 
-    # name_project = serializers.PrimaryKeyRelatedField(many=True, queryset=Project.objects.filter(name=True))
-    name_project = ProjectModelSerializer(Project.objects.name)
+    # name_project = ProjectModelSerializer(instance='id', data={'name'}, partial=True)
+    # name_project = ProjectModelSerializer(data={'name'}, partial=True)  # work
+    # name_project = ProjectModelSerializer(Project.objects.name)  # work
+    # name_project = serializers.PrimaryKeyRelatedField(many=True, queryset=Project.objects.filter(name=True))  # on api don't work
+
 
     class Meta:
         model = TODO

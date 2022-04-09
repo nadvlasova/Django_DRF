@@ -48,7 +48,7 @@ class TODOForm extends React.Component {
                 <div className="form-group">
                     <label htmlFor="project">Проект</label>
                     <select className="select" name="name_project" multiple
-                            onChange={(event) => this.handleTODOChange(event)}>
+                            onChange={(event) => this.handleChange(event)}>
                         {this.props.todos.map((item) => <option value={item.id}> {item.name_project.name}</option>)}
 
                     </select>

@@ -1,19 +1,21 @@
 import React from 'react'
 import {Link} from "react-router-dom";
-import Projects from "./Projects";
+
 
 
 const TodoItem = ({todo, deleteTODO}) => {
     return (
         <tr>
-            <td key={todo.id}>{todo.name_project.name}</td>
-            <td key={todo.id}>{todo.text}</td>
-            <td key={todo.id}>{todo.date_create}</td>
-            <td key={todo.id}>{todo.date_update}</td>
-            <td key={todo.id}>{todo.creator}</td>
+            <td>{todo.id}</td>
+            <td>{todo.name_project.name}</td>
+            <td>{todo.text}</td>
+            <td>{todo.date_create}</td>
+            <td>{todo.date_update}</td>
+            <td>{todo.creator}</td>
             {/*<td>{todo.is_active}</td>*/}
             <td>
                 <button onClick={() => deleteTODO(todo.id)} type='button'>Open</button>
+
             </td>
         </tr>
     )
@@ -24,6 +26,7 @@ const TodoList = ({todos, deleteTODO}) => {
         <div>
             <table className="table">
                 <tr>
+                    <th>ID</th>
                     <th>Name Project</th>
                     <th>Text</th>
                     <th>Date Create</th>

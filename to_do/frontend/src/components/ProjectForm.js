@@ -58,7 +58,6 @@ class ProjectForm extends React.Component {
                 {/*    <input type="number" className="form-control" name="user"*/}
                 {/*           value={this.state.user} onChange={(event) => this.handleChange(event)}/>*/}
                 {/*</div>*/}
-
                 <div>
                     <div className="form-group">
                         <label htmlFor="user">Список пользователей проекта</label>

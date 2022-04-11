@@ -1,22 +1,20 @@
-import React from 'react';
-// import logo from './logo.svg';
+import React from "react";
 import {Route, Link, Switch, Redirect, BrowserRouter as Router} from "react-router-dom";
 
 import './bootstrap/css/bootstrap.min.css'
 import './bootstrap/css/sticky-footer-navbar.css'
 
 import UserList from "./components/User"
-// import {UserList, UserDetail} from "./components/User.js";
 import {ProjectList, ProjectDetail} from "./components/Projects.js";
 import TodoList from "./components/Todos.js";
-import Navbar from "./components/Menu.js";
+
 import Footer from "./components/Footer.js";
 import NotFound404 from "./components/NotFound404.js";
 import LoginForm from "./components/Auth.js";
-import axios from "axios";
 import Cookies from 'universal-cookie';
 import ProjectForm from "./components/ProjectForm";
 import TODOForm from "./components/TodoForm";
+import axios from "axios";
 import todos from "./components/Todos.js";
 
 
@@ -57,10 +55,10 @@ class App extends React.Component {
         })
 
     }
-
+// #  НЕ уходит на бэк!!???
     createTODO(name_project, text, creator) {
         const headers = this.get_headers()
-        const data = {name_project: name_project.name, text: text, creator: creator.pkey.username}
+        const data = {name_project: {name_project}, text: text, creator: creator}
         axios.post('http://127.0.0.1:8000/api/todos/', data, {headers}).then(
             response => {
                 this.load_data()
@@ -207,7 +205,8 @@ class App extends React.Component {
                                 {/*<li> {this.is_authenticated() ? <button onClick={() => this.logout()}>Logout</button> :*/}
                                 {/*    <Link to='/login'>Login</Link>}*/}
                                 {/*</li>*/}
-                                <li>{this.is_authenticated() ? <Link to='/' onClick={() => this.logout()}>Logout</Link> :
+                                <li>{this.is_authenticated() ?
+                                    <Link to='/' onClick={() => this.logout()}>Logout</Link> :
                                     <Link to='/login'>Login</Link>}
                                 </li>
                             </ul>

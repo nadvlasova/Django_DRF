@@ -1,25 +1,26 @@
 import React from "react";
-import projects from "./Projects";
+
 
 class TODOForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {name_project: {}, text: '', creator: []}
+
     }
 
     handleTODOChange(event) {
         if (!event.target.selectedOptions) {
             this.setState({
-                'project': {}
+                'name_project': {}
             })
             return;
         }
-        let projects = []
+        let name_project = []
         for (let i = 0; i < event.target.selectedOptions.length; i++) {
-            projects.push(event.target.selectedOptions.item(i).value)
+            name_project.push(event.target.selectedOptions.item(i).value)
         }
         this.setState({
-            'project': projects
+            'name_project.name': {name_project}
         })
     }
 
@@ -46,20 +47,20 @@ class TODOForm extends React.Component {
         return (
             <form onSubmit={(event) => this.handleSubmit(event)}>
                 <div className="form-group">
-                    <label htmlFor="project">Проект</label>
-                    <select className="select" name="name_project" multiple
-                            onChange={(event) => this.handleChange(event)}>
+                    <label htmlFor="name_project">Проект</label>
+                    <select className="select" name="name_project.name" multiple
+                            onChange={(event) => this.handleTODOChange(event)}>
                         {this.props.todos.map((item) => <option value={item.id}> {item.name_project.name}</option>)}
 
                     </select>
                 </div>
                 <div className="form-group">
-                    <label for="text">Содержание</label>
+                    <label htmlFor="text">Содержание</label>
                     <input type="text" className="form-control" name="text"
                            onChange={(event) => this.handleChange(event)}/>
                 </div>
                 <div className="form-group">
-                    <label for="creator">Создатель</label>
+                    <label htmlFor="creator">Создатель</label>
                     <select className="select" name="creator" multiple
                             onChange={(event) => this.handleChange(event)}>
                         {this.props.todos.map((item) => <option value={item.id}> {item.creator}</option>)}

@@ -15,12 +15,12 @@ class TODOForm extends React.Component {
             })
             return;
         }
-        let name_project = []
+        let name_projects = []
         for (let i = 0; i < event.target.selectedOptions.length; i++) {
-            name_project.push(event.target.selectedOptions.item(i).value)
+            name_projects.push(event.target.selectedOptions.item(i).value)
         }
         this.setState({
-            'name_project.name': {name_project}
+            'name_project': name_projects
         })
     }
 

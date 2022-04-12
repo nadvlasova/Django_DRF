@@ -58,7 +58,7 @@ class App extends React.Component {
 // #  НЕ уходит на бэк!!???
     createTODO(name_project, text, creator) {
         const headers = this.get_headers()
-        const data = {name_project: {name_project}, text: text, creator: creator}
+        const data = {name_project: {name_project}, text: text, creator: creator.pkey.username}
         axios.post('http://127.0.0.1:8000/api/todos/', data, {headers}).then(
             response => {
                 this.load_data()
@@ -231,7 +231,7 @@ class App extends React.Component {
                                 <Route exact path='/todos'> <TodoList todos={this.state.todos}
                                                                       deleteTODO={(id) => this.deleteTODO(id)}/></Route>
                                 <Route exact path='/todos/create'> <TODOForm todos={this.state.todos}
-                                                                             createTODO={(name_project, text, creator) => this.createTODO(name_project.name, text, creator)}/></Route>
+                                                                             createTODO={(name_project, text, creator) => this.createTODO(name_project, text, creator)}/></Route>
 
 
                                 <Route exact path='/login'> <LoginForm get_token={(username,

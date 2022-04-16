@@ -11,31 +11,26 @@ class ProjectModelSerializer(ModelSerializer):
         # fields = ('name', 'link_to_repo', 'user_list')
 
 
-class NameProjectSerializer(ProjectModelSerializer):
-    class Meta:
-        model = Project
-        fields = ['name']
+# class NameProjectSerializer(ProjectModelSerializer):
+#     class Meta:
+#         model = Project
+#         fields = ['name']
 
 
 class TODOModelSerializer(ModelSerializer):
     date_create = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S", default=True)
     date_update = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S", default=True)
-    creator = serializers.CharField(max_length=64)
+    # creator = serializers.CharField(max_length=64)
     # name_project = serializers.CharField(max_length=64)
 
-    name_project = NameProjectSerializer(instance='name')
-    # name_project = ProjectModelSerializer(instance='name', data={'name'}, partial=True)  # work
-
-    # name_project = ProjectModelSerializer(instance='id', data={'name'}, partial=True)
-    # name_project = ProjectModelSerializer(data={'name'}, partial=True)  # work
-    # name_project = ProjectModelSerializer(Project.objects.name)  # work
-    # name_project = serializers.PrimaryKeyRelatedField(many=True, read_only=True)  # on api don't work
+    # def create(self, validated_data):
+    #     return TODO.objects.create(**validated_data)
+    # name_project = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = TODO
         fields = '__all__'
-        # fields = ('name_project', 'creator',)
+       # fields = ['id', 'date_create', 'date_update', 'name_project', 'creator']
 
-    # def create(self, validated_data):
-    #     name_project = Project.objects.name
-    #     return name_project
+
+

@@ -17,7 +17,8 @@ services:
     ports:
       - 8080:8080
     command:
-      bash -c "python manage.py migrate &&
+      bash -c "
+      python manage.py migrate &&
       python manage.py create_test_superuser_users 3 &&
       gunicorn to_do.wsgi -b 0.0.0.0:8080"
     depends_on:
@@ -36,22 +37,4 @@ services:
       - nginx
 
 
-
-
-#  nginx:
-#    build: ./
-#    ports:
-#      - 8000:80
-#    depends_on:
-#      - backend
-#  frontend:
-#    build: ./frontend
-#    ports:
-#      - 80:80
-#    depends_on:
-#      - nginx
-
-
-
-
-
+#python manage.py create_test_superuser_users 3 &&

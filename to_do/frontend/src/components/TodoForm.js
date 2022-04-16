@@ -4,24 +4,7 @@ import React from "react";
 class TODOForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {name_project: {}, text: '', creator: []}
-
-    }
-
-    handleTODOChange(event) {
-        if (!event.target.selectedOptions) {
-            this.setState({
-                'name_project': {}
-            })
-            return;
-        }
-        let name_projects = []
-        for (let i = 0; i < event.target.selectedOptions.length; i++) {
-            name_projects.push(event.target.selectedOptions.item(i).value)
-        }
-        this.setState({
-            'name_project': name_projects
-        })
+        this.state = {name_project: [], text: '', creator: []}
     }
 
     handleChange(event) {
@@ -42,15 +25,14 @@ class TODOForm extends React.Component {
         event.preventDefault()
     }
 
-
     render() {
         return (
             <form onSubmit={(event) => this.handleSubmit(event)}>
                 <div className="form-group">
                     <label htmlFor="name_project">Проект</label>
-                    <select className="select" name="name_project.name" multiple
-                            onChange={(event) => this.handleTODOChange(event)}>
-                        {this.props.todos.map((item) => <option value={item.id}> {item.name_project.name}</option>)}
+                    <select className="select" name="name_project" multiple
+                            onChange={(event) => this.handleChange(event)}>
+                        {this.props.todos.map((item) => <option value={item.id}> {item.name_project}</option>)}
 
                     </select>
                 </div>
@@ -81,5 +63,6 @@ class TODOForm extends React.Component {
         );
     }
 }
+
 
 export default TODOForm

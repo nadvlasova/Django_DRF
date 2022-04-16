@@ -8,9 +8,9 @@ from .serializers import UserModelSerializer, UserBasedModelSerializer
 
 
 class UserModelViewSet(viewsets.ModelViewSet):
-    # renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
+    renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
     queryset = User.objects.all()
-    # serializer_class = UserModelSerializer
+    serializer_class = UserModelSerializer
     # permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):

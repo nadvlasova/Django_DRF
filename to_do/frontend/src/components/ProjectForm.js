@@ -29,6 +29,7 @@ class ProjectForm extends React.Component {
             }
         )
         console.log(event.target.name, event.target.value)
+
     }
 
     handleSubmit(event) {
@@ -61,7 +62,8 @@ class ProjectForm extends React.Component {
                 <div>
                     <div className="form-group">
                         <label htmlFor="user">Список пользователей проекта</label>
-                        <select className="select" name="user" multiple onChange={(event) => this.handleProjectChange(event)}>
+                        <select className="select" name="user" multiple
+                                onChange={(event) => this.handleProjectChange(event)}>
                             {this.props.users_list.map((item) => <option value={item.id}> {item.first_name}</option>)}
 
                         </select>

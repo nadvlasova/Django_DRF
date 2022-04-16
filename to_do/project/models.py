@@ -11,13 +11,12 @@ class Project(models.Model):
 
 
 class TODO(models.Model):
-    name_project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, blank=True)
+    name_project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
     text = models.TextField()
-    date_create = models.DateTimeField(auto_now_add=True, blank=True)
-
-    date_update = models.DateTimeField(auto_now=True, blank=True)
+    date_create = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    date_update = models.DateTimeField(auto_now=True, blank=True, null=True)
     creator = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-    is_active = models.BooleanField(default=True, blank=True)
+    is_active = models.BooleanField(default=True)
 
 
 

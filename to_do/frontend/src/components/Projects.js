@@ -3,7 +3,7 @@ import {Link, useParams} from "react-router-dom";
 
 
 
-const ProjectListItem = ({project, deleteProject}) => {
+export const ProjectListItem = ({project, deleteProject}) => {
     let link_to = `/project/${project.id}`
     return (
         <tr>
@@ -11,7 +11,7 @@ const ProjectListItem = ({project, deleteProject}) => {
             <td>{project.name}</td>
             <td><Link to={project.link_to_repo}>{project.link_to_repo}</Link></td>
             <td>{project.users_list}</td>
-            <td><Link to={link_to}>Detail</Link></td>
+            <td><Link to={`/project/${project.id}`}>Detail</Link></td>
             <td>
                 <button onClick={() => deleteProject(project.id)} type='button'>Delete</button>
             </td>
@@ -45,23 +45,22 @@ const ProjectUserItem = ({user}) => {
         </li>
     )
 }
+// export const ProjectDetail = ({getProject, project}) => {
+//     let {id} = useParams();
+//     getProject(id)
+//     // let users = item.users ? item.users : []
+//     console.log(id)
+//     return (
+//         <div>
+//             <h1>{project.name}</h1>
+//             <a href={project.link_to_repo}>Repository:</a>
+//             <p>Users: {project.users_list}</p>
+//             <ol>
+//                 {/*{project.map((item) => <ProjectDetail item={item}/>)}*/}
+//             </ol>
+//         </div>
+//     )
+// }
 
-export const ProjectDetail = ({getProject, item}) => {
-    let {id} = useParams();
-    getProject(id)
-    let users = item.users ? item.users : []
-    console.log(id)
-    return (
-        <div>
-            <h1>{item.name}</h1>
-            Repository: <a href={item.link_to_repo}>{item.link_to_repo}</a>
-            <p>Users:</p>
-            <ol>
-                {users.map((user) => <ProjectUserItem user={user}/>)}
-            </ol>
-        </div>
-    )
-}
-
-export default {ProjectList, ProjectDetail}
+export default {ProjectList, ProjectListItem}
 // export default ProjectList

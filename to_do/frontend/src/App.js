@@ -5,7 +5,9 @@ import './bootstrap/css/bootstrap.min.css'
 import './bootstrap/css/sticky-footer-navbar.css'
 
 import UserList from "./components/User"
-import {ProjectList, ProjectDetail} from "./components/Projects.js";
+import {ProjectList, ProjectListItem} from "./components/Projects.js";
+import ProjectDetail from "./components/ProjectDetail";
+
 import TodoList from "./components/Todos.js";
 
 import Footer from "./components/Footer.js";
@@ -48,6 +50,7 @@ class App extends React.Component {
             response => {
                 this.load_data()
             }
+
         ).catch(error => {
             console.log(error)
             this.setState({projects: []})
@@ -55,10 +58,10 @@ class App extends React.Component {
         })
 
     }
-// #  НЕ уходит на бэк!!???
+
     createTODO(name_project, text, creator) {
         const headers = this.get_headers()
-        const data = {name_project: {name_project}, text: text, creator: creator.pkey.username}
+        const data = {name_project: name_project, text: text, creator: creator}
         axios.post('http://127.0.0.1:8000/api/todos/', data, {headers}).then(
             response => {
                 this.load_data()
@@ -145,9 +148,9 @@ class App extends React.Component {
     getProject(id) {
         axios.get(get_url(`projects/${id}`))
             .then(response => {
-                // console.log(response.data)
-                this.setState({project: response.data})
-            }).catch(error => console.log(error))
+                console.log(response.data)
+        this.setState({project: response.data})
+               }).catch(error => console.log(error))
     }
 
     // getUser(id) {
@@ -237,11 +240,11 @@ class App extends React.Component {
                                 <Route exact path='/login'> <LoginForm get_token={(username,
                                                                                    password) => this.get_token(username, password)}/>
                                 </Route>
-
-
-                                <Route path="/project/:id"
-                                       children={<ProjectDetail getProject={(id) => this.getProject(id)}
-                                                                item={this.state.project}/>}/>
+                                <Route exact path='/project/:id' component = {() => <ProjectListItem projects={this.state.projects} />} />
+                                {/*<Route exact path='/project/:id' component = {() => <ProjectDetail projects={this.state.projects} />} />*/}
+                                {/*<Route path="/project/:id"*/}
+                                {/*       children={<ProjectDetail getProject={(id) => this.getProject(id)}*/}
+                                {/*                                project = {(name, link_to_repo, user_list) => this.ProjectDetail(name, link_to_repo, user_list)}/>}/>*/}
                                 {/*<Route path='/user/:id'*/}
                                 {/*       children={<UserDetail getUser={(id) => this.getUser(id)}*/}
                                 {/*                             item={this.state.user}/>}/>*/}

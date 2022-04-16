@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-xh(u&eauf9s1h27y6*nzapb6!+7umv9%8cvc+(yb3)@-j%3dk!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
@@ -71,8 +71,8 @@ ROOT_URLCONF = 'to_do.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        # 'DIRS': [BASE_DIR / 'frontend/build'],
+        # 'DIRS': [],
+        'DIRS': [BASE_DIR / 'frontend/build'],
         # 'DIRS': [BASE_DIR / '../../frontend/build'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -142,9 +142,9 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
+# STATIC_ROOT = './static'
 STATIC_URL = 'static/'
-# STATICFILES_DIRS = (BASE_DIR / 'frontend/build/static/',)
+STATICFILES_DIRS = (BASE_DIR / 'frontend/build/static/',)
 # STATICFILES_DIRS = (BASE_DIR / '../../frontend/build/static/',)
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

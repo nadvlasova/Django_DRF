@@ -8,7 +8,9 @@ class UserModelSerializer(ModelSerializer):
         model = User
         fields = ('id', 'username', 'first_name', 'last_name', 'email')
         # fields = '__all__'
-        # exclude = ('email')
+
+        # def create(self, validated_data):
+        #     return User(**validated_data)
 
 
 class UserBasedModelSerializer(ModelSerializer):
@@ -18,10 +20,7 @@ class UserBasedModelSerializer(ModelSerializer):
         fields = ('first_name', 'last_name')
 
 
-# class UsersListSerializer(UserModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ('username')
+
 
 
 

@@ -1,5 +1,4 @@
 """to_do URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
 Examples:
@@ -13,19 +12,64 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
+from django.views.generic import TemplateView
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from graphene_django.views import GraphQLView
+from rest_framework import permissions
+from rest_framework.authtoken import views
 from rest_framework.routers import DefaultRouter
 
+from project.views import ProjectModelViewSet, TODOCustomViewSet
+from user_api.views import UserListAPIView
 from usersapp.views import UserModelViewSet
 
+# from usersapp.views import UserCustomViewSet
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title='to_do',
+        default_version='v1',
+        description='Project',
+        contact=openapi.Contact(email='to_do@mail.ru'),
+        license=openapi.License(name='GB License'),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,)
+)
+
+
 router = DefaultRouter()
+
 router.register('usersapp', UserModelViewSet)
-# router.register('admins', AdminModelViewSet)
-# router.register('managers', ManagerModelViewSet)
+router.register('projects', ProjectModelViewSet)
+router.register('todos', TODOCustomViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('api-token-auth/', views.obtain_auth_token),
+
+    # path('api/<str:version>/user/', UserListAPIView.as_view()),
+    # path('api/user/v1', include('user_api.urls', namespace='v1')),
+    # path('api/user/v2', include('user_api.urls', namespace='v2')),
+
+    path('swagger/', schema_view.with_ui('swagger')),
+    # path('swagger<str:format>', schema_view.without_ui()),
+
+    path('redoc/', schema_view.with_ui('redoc')),
+    path('graphql/', GraphQLView.as_view(graphiql=True)),
+
+    path('', TemplateView.as_view(template_name='index.html')),
+
 ]
+urlpatterns += staticfiles_urlpatterns()
+
+# + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,12 +1,13 @@
-import React from "react";
-import {Route, Link, Switch, Redirect, BrowserRouter as Router} from "react-router-dom";
+import React, {useEffect} from "react";
+import {Route, Link, Switch, Redirect, BrowserRouter as Router, BrowserRouter} from "react-router-dom";
 
 import './bootstrap/css/bootstrap.min.css'
 import './bootstrap/css/sticky-footer-navbar.css'
 
 import UserList from "./components/User"
-import {ProjectList, ProjectListItem} from "./components/Projects.js";
+import ProjectList from "./components/Projects.js";
 import ProjectDetail from "./components/ProjectDetail";
+
 
 import TodoList from "./components/Todos.js";
 
@@ -18,6 +19,7 @@ import ProjectForm from "./components/ProjectForm";
 import TODOForm from "./components/TodoForm";
 import axios from "axios";
 import todos from "./components/Todos.js";
+import ProjecDetailItem from "./components/ProjectDetail";
 
 
 const DOMAIN = 'http://127.0.0.1:8000/api/'
@@ -50,7 +52,6 @@ class App extends React.Component {
             response => {
                 this.load_data()
             }
-
         ).catch(error => {
             console.log(error)
             this.setState({projects: []})
@@ -149,8 +150,8 @@ class App extends React.Component {
         axios.get(get_url(`projects/${id}`))
             .then(response => {
                 console.log(response.data)
-        this.setState({project: response.data})
-               }).catch(error => console.log(error))
+                this.setState({project: response.data})
+            }).catch(error => console.log(error))
     }
 
     // getUser(id) {
@@ -217,43 +218,51 @@ class App extends React.Component {
                     </header>
                     <main role="main" class="flex-shrink-0">
                         <div className="container">
-                            <Switch>
-                                {/*<Route exact path='/'> <UserList users={this.state.users}/> </Route>*/}
+                            {/*<BrowserRouter>*/}
+                                <Switch>
+                                    {/*<Route exact path='/'> <UserList users={this.state.users}/> </Route>*/}
 
-                                <Route exact path='/' component={() => <UserList users={this.state.users}
-                                                                                 deleteUser={(id) => this.deleteUser(id)}/>}/>
-
-
-                                <Route exact path='/projects'> <ProjectList projects={this.state.projects}
-                                                                            deleteProject={(id) => this.deleteProject(id)}/></Route>
-
-                                <Route exact path='/projects/create'> <ProjectForm users_list={this.state.users}
-                                                                                   createProject={(name, link_to_repo, user) => this.createProject(name, link_to_repo, user)}/></Route>
+                                    <Route exact path='/' component={() => <UserList users={this.state.users}
+                                                                                     deleteUser={(id) => this.deleteUser(id)}/>}/>
 
 
-                                <Route exact path='/todos'> <TodoList todos={this.state.todos}
-                                                                      deleteTODO={(id) => this.deleteTODO(id)}/></Route>
-                                <Route exact path='/todos/create'> <TODOForm todos={this.state.todos}
-                                                                             createTODO={(name_project, text, creator) => this.createTODO(name_project, text, creator)}/></Route>
+                                    <Route path="/project/:id" children={<ProjectDetail item ={this.state.project} getProject={(id) => this.getProject(id)}/>}/>
+                                    <Route exact path='/projects'> <ProjectList projects={this.state.projects}
+                                                                                deleteProject={(id) => this.deleteProject(id)}/></Route>
+
+                                    <Route exact path='/projects/create'> <ProjectForm users_list={this.state.users}
+                                                                                       createProject={(name, link_to_repo, user) => this.createProject(name, link_to_repo, user)}/></Route>
 
 
-                                <Route exact path='/login'> <LoginForm get_token={(username,
-                                                                                   password) => this.get_token(username, password)}/>
-                                </Route>
-                                <Route exact path='/project/:id' component = {() => <ProjectListItem projects={this.state.projects} />} />
-                                {/*<Route exact path='/project/:id' component = {() => <ProjectDetail projects={this.state.projects} />} />*/}
-                                {/*<Route path="/project/:id"*/}
-                                {/*       children={<ProjectDetail getProject={(id) => this.getProject(id)}*/}
-                                {/*                                project = {(name, link_to_repo, user_list) => this.ProjectDetail(name, link_to_repo, user_list)}/>}/>*/}
-                                {/*<Route path='/user/:id'*/}
-                                {/*       children={<UserDetail getUser={(id) => this.getUser(id)}*/}
-                                {/*                             item={this.state.user}/>}/>*/}
+                                    <Route exact path='/todos'> <TodoList todos={this.state.todos}
+                                                                          deleteTODO={(id) => this.deleteTODO(id)}/></Route>
+                                    <Route exact path='/todos/create'> <TODOForm todos={this.state.todos}
+                                                                                 createTODO={(name_project, text, creator) => this.createTODO(name_project, text, creator)}/></Route>
 
-                                {/*<Redirect from='/projects' to='/project/project:id'/>*/}
-                                {/*<Redirect from='/' to='/user:id'/>*/}
 
-                                <Route component={NotFound404}/>
-                            </Switch>
+                                    <Route exact path='/login'> <LoginForm get_token={(username,
+                                                                                       password) => this.get_token(username, password)}/>
+                                    </Route>
+
+
+                                    {/*<Route path='/project/:id'> <ProjectDetail projects={this.state.projects} /></Route>*/}
+
+                                    {/*<Route path="/project/:id" children={<ProjectDetail getProject={(id) => this.getProject(id)}*/}
+                                    {/*                                project = {(name, link_to_repo, user_list) => this.ProjectDetail(name, link_to_repo, user_list)}/>}/>*/}
+
+
+
+
+                                    {/*<Route path='/user/:id'*/}
+                                    {/*       children={<UserDetail getUser={(id) => this.getUser(id)}*/}
+                                    {/*                             item={this.state.user}/>}/>*/}
+
+                                    {/*<Redirect from='/projects' to='/project/project:id'/>*/}
+                                    {/*<Redirect from='/' to='/user:id'/>*/}
+
+                                    <Route component={NotFound404}/>
+                                </Switch>
+                            {/*</BrowserRouter>*/}
                         </div>
                     </main>
                     <Footer/>

@@ -12,9 +12,12 @@ const TodoItem = ({todo, deleteTODO}) => {
             <td>{todo.date_create}</td>
             <td>{todo.date_update}</td>
             <td>{todo.creator}</td>
-            {/*<td>{todo.is_active}</td>*/}
+            {/*<td>{todo.is_active.value}</td>*/}
+
             <td>
-                <button onClick={() => deleteTODO(todo.id)} type='button'>Open</button>
+
+                    <button onClick={() => deleteTODO(todo.id)} type='button'>Open </button>
+
             </td>
         </tr>
     )
